@@ -51,7 +51,7 @@ class BankAccount:
 
     def withdraw(self, amount: int):
         if amount > self.__account:
-            print('Недостаточно средств.')
+            raise ValueError('Недостаточно средств.')
         else:
             self.__account -= amount
 
@@ -62,11 +62,16 @@ class BankAccount:
 BA = BankAccount(1000000)
 
 BA.deposit(100000)
-
-BA.withdraw(200000)
+try:
+    BA.withdraw(200000)
+except ValueError as e:
+    print(e, 'Попробуйте с другой суммой')
 
 BA.get_balance()
 
-BA.withdraw(1000001)
+try:
+    BA.withdraw(1000001)
+except ValueError as e:
+    print(e,'Попробуйте с другой суммой')
 
 
