@@ -11,6 +11,10 @@
 #  • Добавьте метод для изменения года издания.
 
 
+from abc import abstractmethod
+import math
+
+
 class Book:
     
     def __init__(self, name: str, author: str, year: int ):
@@ -109,3 +113,47 @@ class Student(Person):
 s = Student('Иванов',21,'СФУ',4.2)
 
 print(s)
+
+
+# Задача 4: Полиморфизм
+
+# Описание: Создайте классы Rectangle и Circle. Оба класса должны иметь метод get_area(), 
+# который возвращает площадь фигуры. Реализуйте механизм полиморфизма, который позволяет 
+# вызвать метод get_area() для объекта любого класса.
+
+# Условия:
+
+#  • Класс Rectangle должен принимать длину и ширину, а класс Circle — радиус.
+#  • Метод get_area() должен возвращать площадь фигуры.
+
+class Figure:
+    @abstractmethod
+    def get_area(self) -> float:
+        raise NotImplementedError('get_area нужно переопределить')
+        
+
+
+class Rectangle(Figure):
+    def __init__(self, length: int, width: int):
+        self.__length: int = length
+        self.__widht: int = width
+
+    def get_area(self):
+        return self.__widht * self.__length
+
+
+    
+
+class Circle(Figure):
+    def __init__(self, radius: int):
+        self.__radius: int = radius
+
+    def get_area(self):
+        return math.pi * self.__radius * self.__radius
+
+
+r = Rectangle(100,10)
+print(r.get_area())
+
+c = Circle(10)
+print(c.get_area())
