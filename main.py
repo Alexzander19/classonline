@@ -28,3 +28,45 @@ b = Book('Война и Мир', 'Л.Н. Толстой',1827)
 b.get_info()
 b.ch_year(1822)
 b.get_info()
+
+
+# Задача 2: Класс для банковского счета
+
+# Описание: Создайте класс BankAccount, который будет моделировать банковский счёт. В классе должны быть методы для пополнения счёта, снятия денег и вывода текущего баланса.
+
+# Условия:
+
+#  • Конструктор должен принимать начальный баланс.
+#  • Метод deposit(amount) для пополнения счёта.
+#  • Метод withdraw(amount) для снятия средств (не должно быть возможности уйти в минус).
+#  • Метод get_balance() для отображения текущего баланса.
+
+class BankAccount:
+    def __init__(self, account: int):
+        self.__account: int = account
+
+
+    def deposit(self,amount: int):
+        self.__account += amount
+
+    def withdraw(self, amount: int):
+        if amount > self.__account:
+            print('Недостаточно средств.')
+        else:
+            self.__account -= amount
+
+    def get_balance(self):
+        print(f'Баланс счета: {self.__account}')
+
+
+BA = BankAccount(1000000)
+
+BA.deposit(100000)
+
+BA.withdraw(200000)
+
+BA.get_balance()
+
+BA.withdraw(1000001)
+
+
