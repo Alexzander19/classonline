@@ -44,15 +44,6 @@ print(cn2 - cn1)
 
 
 
-
-
-
-
-
-
-
-
-
 # Задача 6: Инкапсуляция
 
 # Описание: Создайте класс Car, который содержит информацию о марке автомобиля, максимальной 
@@ -65,6 +56,65 @@ print(cn2 - cn1)
 #  • Создайте методы для увеличения и уменьшения скорости, контролируя, чтобы скорость не 
 #      превышала максимальную.
 #  • Добавьте метод для отображения текущей скорости.
+
+class Car:
+    def __init__(self, mark: str, max_speed: int):
+        self._mark: str = mark # Одно подчеркивание ничего не меняет это лишь предупреждает, что не нужно трогать
+        self.max_speed: int = max_speed
+        self.__current_speed: int = 0 # Два подчеркивания приводит к  NameMAngling, имя переменной изменяется на _Car__current_speed 
+
+    def __str__(self):
+        return f'Марка: {self._mark}, максимальная скорость: {self.max_speed}'
+    
+    #@current_speed.setter  МЫ В КЛАССЕ ПИСАЛИ ПОДОБНОЕ. ЧТО ЭТО ДАЕТ? ЭТО НУЖНО В ЭТОМ ЗАДАНИ?
+    def increase(self):
+        if self.__current_speed + 5 <= self.max_speed:
+            self.__current_speed +=5
+        else:
+            raise ValueError('МАКСИМАЛЬНАЯ СКОРОКСТЬ НЕ ДОЛЖНА ПРЕВЫШАТЬ max_speed')
+
+    def decrease(self):
+        if self.__current_speed - 5 >= 0:
+            self.__current_speed -= 5
+        else:
+            raise ValueError('СКОРОСТЬ НЕ МОЖЕТ БЫТЬ МЕНЬШЕ 0')
+
+    def get_speed(self):
+        return self.__current_speed
+
+
+bmw = Car('BMW',250)
+
+for i in range(0,100):
+    try:
+        bmw.increase()
+    except ValueError as e:
+        print(e)
+        break
+
+
+print(bmw.get_speed())
+
+for i in range(0,10):
+    try:
+        bmw.decrease()
+    except ValueError as e:
+        print(e)
+        break  
+
+print(bmw.get_speed())
+
+# bmw.__current_speed = 300  здесь создается новая переменная
+
+# print(bmw.__current_speed)
+
+print(dir(bmw))
+
+
+
+
+
+
 
 # Задача 7: Абстрактные классы
 
