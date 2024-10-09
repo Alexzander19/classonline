@@ -9,6 +9,7 @@
 #  • Реализуйте магические методы для сложения и вычитания.
 
 from __future__ import annotations
+from abc import abstractmethod
 import math
 
 class ComplexNumber:
@@ -127,5 +128,33 @@ print(dir(bmw))
 #  • Класс Square должен принимать длину стороны, а класс Triangle — основание и высоту.
 #  • Метод get_area() должен возвращать площадь фигуры.
 
+
+class Shape:
+    @abstractmethod
+    def get_area(self) -> int:
+        raise NotImplementedError(' ОПРЕДЕЛИТЕ МЕТОД get_area')
+
+
+class Square(Shape):
+    def __init__(self,length: int):
+        super().__init__()
+        self._length: int = length
+
+    def get_area(self) -> int:
+        return self._length * self._length
+
+class Triangle(Shape):
+    def __init__(self,base: int, height: int):
+        super().__init__()
+        self._base: int = base
+        self._height: int = height
+
+    def get_area(self) -> int:
+        return self._base * self._height / 2
+
+print('Площадь квадрата 10 * 10: ', Square(10).get_area())
+print('Площадь треугольника 10 * 10: ', Triangle(10,10).get_area())
+
+
 # Каждая из этих задач поможет вам лучше понять принципы ООП, такие как инкапсуляция, наследование, 
-# полиморфизм и абстракция.
+# полиморфизм и абстракция. ПОЛИМОРФИЗМ и АБСТРАКЦИЯ - это все про задачу 7?
